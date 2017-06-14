@@ -11,9 +11,10 @@ describe('Controls', () => {
     expect(Controls).toExist();
   });
 
-  describe('Correct buttons should display', () => {
+  describe('render', () => {
     it('Should display Clear and Pause buttons if status is started', () => {
-      var controls = TestUtils.renderIntoDocument(<Controls countdownStatus='started'/>);
+      var spy=expect.createSpy();
+      var controls = TestUtils.renderIntoDocument(<Controls onStatusChange={spy} countdownStatus='started'/>);
 
       var clearButton = controls.refs.clearButton;
       expect(clearButton).toExist();
@@ -27,7 +28,8 @@ describe('Controls', () => {
     });
 
     it( 'Should display Clear and Start buttons if status is paused', () => {
-      var controls = TestUtils.renderIntoDocument(<Controls countdownStatus='paused'/>);
+      var spy = expect.createSpy();
+      var controls = TestUtils.renderIntoDocument(<Controls onStatusChange={spy} countdownStatus='paused'/>);
 
       var clearButton = controls.refs.clearButton;
       expect(clearButton).toExist();
