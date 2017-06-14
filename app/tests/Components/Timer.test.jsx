@@ -38,6 +38,7 @@ describe('Timer', () => {
     it('Should pause counting when the timerStatus is "paused"', (done) => {
       var timer = TestUtils.renderIntoDocument(<Timer/>);
       timer.handleSecondsUpdate(2);
+      timer.handleStatusChange('started');
       timer.handleStatusChange('paused');
 
       setTimeout( () => {
@@ -51,6 +52,7 @@ describe('Timer', () => {
     it('should stop and reset the counter when timerStatus is "stopped"', (done) => {
       var timer = TestUtils.renderIntoDocument(<Timer/>);
       timer.handleSecondsUpdate(3);
+      timer.handleStatusChange('started');
       timer.handleStatusChange('stopped');
 
       expect(timer.state.count).toBe(0);
